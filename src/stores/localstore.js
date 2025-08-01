@@ -17,7 +17,7 @@ export const useNoteStore = defineStore('note', () => {
 
     const addNote = () => {
     if (newNote.value.length <= 5) {
-      alert('Too short — gotta have more than 10 characters!')
+      alert('Too short — gotta have more than 5 characters!')
       return
     }
     notes.value.push({
