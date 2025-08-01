@@ -14,6 +14,8 @@ function onAddClick() {
 function closeModal() {
   showModal.value = false
 }
+
+
 </script>
 
 
@@ -28,8 +30,12 @@ function closeModal() {
     <div class="container">
       <header>
         <h1>Notes</h1>
-        <button @click=" showModal = true">+</button>
+          <div class="btn-group">
+            <button @click="showModal = true">+</button>
+            <button class="local" @click="store.clearNotes()">🗑</button>
+          </div>
       </header>
+  
       <div class="card-container">
         <div class="card"
         v-for="(note, i) in store.notes"
@@ -39,12 +45,47 @@ function closeModal() {
           <p class="main-text">{{ note.text }}</p>
           <p class="date">{{ new Date(note.date).toLocaleDateString("lv-LV") }}</p>
         </div>
-        <div class="spacebetween"></div>
         </div>
       </div>
   </main>
 </template>
 <style scoped>
+header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  background-color: white;
+}
+
+
+h1 {
+  margin-left:15%;      
+  font-size: 75px;
+  font-weight: bold;
+  color: #000;
+}
+
+
+.btn-group {
+  display: flex;
+  margin-top: 2%;
+  margin-right: 15%;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.btn-group button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(21,20,20);
+  color: white;
+  border-radius: 50%;
+   margin-left: 10px;
+  padding: 0;          
+}
   main{
     height: 100vh;
     width: 100vw;
@@ -56,50 +97,17 @@ function closeModal() {
     padding:10px;
     margin:0 auto;
   }
-  header{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  h1{
-    font-weight:bold;
-    margin-bottom:25px;
-    font-size:75px;
-    color:rgb(0, 0, 0);
-    margin-left:50px;
-  }
-
-  header button{
-    border:none;
-    padding:10px;
-    margin-right:50px;
-    width:50px;
-    height:50px;
-    cursor:pointer;
-    background-color:rgb(21,20,20);
-    color:white;
-    border-radius:100%;
-    
-  }
   .card{
     position: relative;
     width:225px;
     height:225px;
-    padding:10px;
     background-color: rgb(237,182,44);
     padding:10px;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     border-radius:15px;
-    margin-right: 20px;
-    margin-left:50px;
-    margin-top: 20px;
-  }
-  .spacebetween {
-    background-color:black;
-    margin-left:-50px;
-    display: flex;
+    margin-top:2.5%;
   }
   .main-text{
     color:black;
@@ -113,9 +121,12 @@ function closeModal() {
     color:black;
     font-weight: bold;
   }
+
   .card-container{
-    display:flex;
-    flex-wrap:wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 0.23fr));
+    gap: 16px;
+    justify-content: center;
   }
 
   .overlay{

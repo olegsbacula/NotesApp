@@ -10,7 +10,10 @@ export const useNoteStore = defineStore('note', () => {
 
   const newNote = ref('')
 
-
+  function clearNotes() {
+      notes.value = []
+      localStorage.removeItem('notes')
+    }
   const notes = ref(
     JSON.parse(localStorage.getItem('notes') || '[]')
   )
@@ -46,5 +49,6 @@ export const useNoteStore = defineStore('note', () => {
     notes,
     addNote,
     deleteNote,
+    clearNotes,
   }
 })
